@@ -338,7 +338,7 @@ export class Manager extends EventEmitter {
   ): Promise<SearchResult> {
     return new Promise(async (resolve, reject) => {
       const node = this.leastUsedNodes.first();
-      if (!node) throw new Error("No available nodes.");
+      if (!node) reject(new Error("No available nodes."));
 
       const _query: SearchQuery = typeof query === "string" ? { query } : query;
       const _source = Manager.DEFAULT_SOURCES[_query.source ?? this.options.defaultSearchPlatform] ?? _query.source;
